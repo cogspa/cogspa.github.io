@@ -1,107 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Form Handling</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        h1 {
-            color: #2c3e50;
-        }
-        h2 {
-            color: #2c3e50;
-        }
-        h3 {
-            color: #34495e;
-        }
-        label {
-            display: inline-block;
-            width: 100px;
-            margin-top: 10px;
-        }
-        input[type="text"] {
-            width: 200px;
-            margin-bottom: 10px;
-        }
-        input[type="submit"] {
-            margin-top: 20px;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
+    <title>Polka Dot and Stripes Pattern Example</title>
 </head>
+
 <body>
-    <h1>Basic PHP Form Handling</h1>
+    <svg width="1920" height="1080">
+        <!-- Define patterns -->
+        <defs>
+            <pattern id="dots" patternUnits="userSpaceOnUse" width="20" height="20">
+                <circle cx="10" cy="10" r="5" stroke="#e83859" stroke-width="2" fill="none" />
+                <circle cx="5" cy="5" r="3" stroke="#0077c2" stroke-width="2" fill="none" />
+            </pattern>
+            <pattern id="stripes" patternUnits="userSpaceOnUse" width="20" height="20">
+                <rect width="20" height="20" fill="#0077c2" />
+                <line x1="0" y1="0" x2="20" y2="20" stroke="#e83859" stroke-width="2" />
+            </pattern>
+            <pattern id="vertical-stripes" patternUnits="userSpaceOnUse" width="20" height="20">
+                <rect width="20" height="20" fill="#e83859" />
+                <line x1="0" y1="0" x2="20" y2="20" stroke="#0077c2" stroke-width="2" />
+            </pattern>
+        </defs>
+        <!-- Create overlapping rectangles -->
+        <rect x="100" y="200" width="800" height="600" fill="url(#dots)"
+            style="position: absolute; top: 200px; left: 100px; mix-blend-mode: overlay; z-index: 1;" />
+        <rect x="400" y="400" width="700" height="500" fill="url(#stripes)"
+            style="position: absolute; top: 400px; left: 400px; mix-blend-mode: difference; z-index: 2;" />
+        <rect x="300" y="100" width="600" height="700" fill="url(#vertical-stripes)"
+            style="position: absolute; top: 100px; left: 300px; mix-blend-mode: hard-light; z-index: 3;" />
+        <rect x="600" y="300" width="900" height="400" fill="url(#dots)"
+            style="position: absolute; top: 300px; left: 600px; mix-blend-mode: screen; z-index: 4;" />
+        <!-- Add images -->
+        <!-- make the images overlap-->
+        <image href="https://source.unsplash.com/random/700x700" x="700" y="300" width="800" height="800"
+            style="position: absolute; top: 300px; left: 700px; mix-blend-mode: hard-light; z-index: 4;" />
+        <image href="https://source.unsplash.com/random/800x800" x="1000" y="100" width="800" height="800"
+            style="position: absolute; top: 100px; left: 1000px; mix-blend-mode: overlay; z-index: 5;" />
+        <image href="https://source.unsplash.com/random/900x900" x="600" y="400" width="800" height="800"
+            style="position: absolute; top: 400px; left: 600px; mix-blend-mode: multiply; z-index: 6;" />
+        <image href="https://source.unsplash.com/random/1000x1000" x="300" y="200" width="800" height="800"
+            style="position: absolute; top: 200px; left: 300px; mix-blend-mode: screen; z-index: 7;" />
+        <image href="https://source.unsplash.com/random/1100x1100" x="100" y="500" width="800" height="800"
+            style="position: absolute; top: 500px; left: 100px; mix-blend-mode: difference; z-index: 8;" />
+    </svg>
 
-    <h2>Step 1: Create the Form HTML Structure</h2>
-    <pre>
-&lt;form action="page.php" method="post"&gt;
-    &lt;label for="fname"&gt;First Name:&lt;/label&gt;
-    &lt;input type="text" id="fname" name="fname"&gt;&lt;br&gt;
-    &lt;label for="lname"&gt;Last Name:&lt;/label&gt;
-    &lt;input type="text" id="lname" name="lname"&gt;&lt;br&gt;
-    &lt;input type="submit" value="Submit"&gt;
-&lt;/form&gt;
-    </pre>
+    <script>
+        // Refresh the page every 2.2 seconds
+        setInterval(function () {
+            location.reload();
+        }, 12200);
 
-    <h2>Step 2: Add Input Fields</h2>
-    <p>Use &lt;label&gt; and &lt;input&gt; tags within the form. The <code>input</code> tag has various attributes like <code>type="text"</code> for text fields and <code>type="submit"</code> for a submit button.</p>
+        //randomize the colors the patterns
+        // Define the patterns
+        var dotsPattern = document.getElementById('dots');
+        var stripesPattern = document.getElementById('stripes');
 
-    <h2>Step 3: PHP Code to Handle the Form Data</h2>
-    <pre>
-&lt;?php
-$first_name = $_POST['fname'];
-$last_name = $_POST['lname'];
-echo "First Name: " . $first_name . "&lt;br&gt;";
-echo "Last Name: " . $last_name . "&lt;br&gt;";
-?&gt;
-    </pre>
+        // Generate random colors for the patterns
+        var dotsColor = getRandomColor();
+        var stripesColor = getRandomColor();
 
-    <h2>Step 4: Adding More Fields (Optional)</h2>
-    <pre>
-&lt;label for="email"&gt;Email:&lt;/label&gt;
-&lt;input type="text" id="email" name="email"&gt;&lt;br&gt;
-    </pre>
+        // Set the colors of the patterns
+        dotsPattern.querySelector('circle').setAttribute('stroke', dotsColor);
+        stripesPattern.querySelector('line').setAttribute('stroke', stripesColor);
 
-    <h2>Step 5: Styling the Form</h2>
-    <p>Use CSS to style the form elements.</p>
-    <pre>
-&lt;style&gt;
-    label {
-        display: inline-block;
-        width: 100px;
-    }
-    input[type="text"] {
-        width: 200px;
-    }
-&lt;/style&gt;
-    </pre>
+        // Function to generate a random color
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
 
-    <h2>Step 6: Testing the Form</h2>
-    <p>Upload the HTML and PHP files to your server. Access the HTML file in a browser, fill out the form, and submit it. Ensure that the form data is correctly processed and displayed by the PHP script.</p>
 
-    <h2>Using MAMP to View PHP Files Locally</h2>
-    <h3>What is MAMP?</h3>
-    <p>MAMP (Macintosh, Apache, MySQL, PHP) is a free, local server environment that you can install on macOS and Windows. It provides all the tools you need to run WordPress on your desktop PC for testing or development purposes. It is commonly used to set up a local PHP environment.</p>
+    </script>
 
-    <h3>Steps to Use MAMP for Viewing PHP Files Locally</h3>
-    <ol>
-        <li><strong>Download and Install MAMP:</strong> Go to the <a href="https://www.mamp.info/en/downloads/" style="color: #2980b9;">MAMP website</a>, download the installer for your operating system, and install it.</li>
-        <li><strong>Start MAMP:</strong> Open MAMP and click on the "Start Servers" button. This will start the Apache and MySQL servers.</li>
-        <li><strong>Place Your PHP Files in the MAMP Document Root:</strong> By default, the document root for MAMP is set to <code>/Applications/MAMP/htdocs</code> on macOS or <code>C:\MAMP\htdocs</code> on Windows. Place your PHP files in this directory.</li>
-        <li><strong>Access Your PHP Files:</strong> Open a web browser and go to <code>http://localhost:8888/yourfile.php</code>. Replace <code>yourfile.php</code> with the name of your PHP file. You should see your PHP file being executed and displayed in the browser.</li>
-    </ol>
 </body>
-</html>
-

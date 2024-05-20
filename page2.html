@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Polka Dot and Stripes Pattern Example</title>
+</head>
+
+<body>
+    <svg width="1920" height="1080">
+        <!-- Define patterns -->
+        <defs>
+            <pattern id="dots" patternUnits="userSpaceOnUse" width="20" height="20">
+                <circle cx="10" cy="10" r="5" stroke="#e83859" stroke-width="2" fill="none" />
+                <circle cx="5" cy="5" r="3" stroke="#0077c2" stroke-width="2" fill="none" />
+            </pattern>
+            <pattern id="stripes" patternUnits="userSpaceOnUse" width="20" height="20">
+                <rect width="20" height="20" fill="#0077c2" />
+                <line x1="0" y1="0" x2="20" y2="20" stroke="#e83859" stroke-width="2" />
+            </pattern>
+            <pattern id="vertical-stripes" patternUnits="userSpaceOnUse" width="20" height="20">
+                <rect width="20" height="20" fill="#e83859" />
+                <line x1="0" y1="0" x2="20" y2="20" stroke="#0077c2" stroke-width="2" />
+            </pattern>
+        </defs>
+        <!-- Create overlapping rectangles -->
+        <rect x="100" y="200" width="800" height="600" fill="url(#dots)"
+            style="position: absolute; top: 200px; left: 100px; mix-blend-mode: overlay; z-index: 1;" />
+        <rect x="400" y="400" width="700" height="500" fill="url(#stripes)"
+            style="position: absolute; top: 400px; left: 400px; mix-blend-mode: difference; z-index: 2;" />
+        <rect x="300" y="100" width="600" height="700" fill="url(#vertical-stripes)"
+            style="position: absolute; top: 100px; left: 300px; mix-blend-mode: hard-light; z-index: 3;" />
+        <rect x="600" y="300" width="900" height="400" fill="url(#dots)"
+            style="position: absolute; top: 300px; left: 600px; mix-blend-mode: screen; z-index: 4;" />
+        <!-- Add images -->
+        <!-- make the images overlap-->
+        <image href="https://source.unsplash.com/random/700x700" x="700" y="300" width="800" height="800"
+            style="position: absolute; top: 300px; left: 700px; mix-blend-mode: hard-light; z-index: 4;" />
+        <image href="https://source.unsplash.com/random/800x800" x="1000" y="100" width="800" height="800"
+            style="position: absolute; top: 100px; left: 1000px; mix-blend-mode: overlay; z-index: 5;" />
+        <image href="https://source.unsplash.com/random/900x900" x="600" y="400" width="800" height="800"
+            style="position: absolute; top: 400px; left: 600px; mix-blend-mode: multiply; z-index: 6;" />
+        <image href="https://source.unsplash.com/random/1000x1000" x="300" y="200" width="800" height="800"
+            style="position: absolute; top: 200px; left: 300px; mix-blend-mode: screen; z-index: 7;" />
+        <image href="https://source.unsplash.com/random/1100x1100" x="100" y="500" width="800" height="800"
+            style="position: absolute; top: 500px; left: 100px; mix-blend-mode: difference; z-index: 8;" />
+    </svg>
+
+    <script>
+        // Refresh the page every 2.2 seconds
+        setInterval(function () {
+            location.reload();
+        }, 12200);
+
+        //randomize the colors the patterns
+        // Define the patterns
+        var dotsPattern = document.getElementById('dots');
+        var stripesPattern = document.getElementById('stripes');
+
+        // Generate random colors for the patterns
+        var dotsColor = getRandomColor();
+        var stripesColor = getRandomColor();
+
+        // Set the colors of the patterns
+        dotsPattern.querySelector('circle').setAttribute('stroke', dotsColor);
+        stripesPattern.querySelector('line').setAttribute('stroke', stripesColor);
+
+        // Function to generate a random color
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+
+    </script>
+
+</body>

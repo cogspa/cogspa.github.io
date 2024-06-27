@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mega Menu Nav</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+    z-index: 2;
+}
+
+.navbar a, .dropbtn {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #575757;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+    position: relative; /* Ensure the dropdown is relative to navbar */
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.dropdown-content, .mega-dropdown {
+    display: none;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a, .mega-dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover, .mega-dropdown a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content, .dropdown.sticky .dropdown-content,
+.dropdown:hover .mega-dropdown, .dropdown.sticky .mega-dropdown {
+    display: block;
+}
+
+.mega-dropdown .row {
+    display: flex;
+    padding: 20px;
+}
+
+.mega-dropdown .column {
+    flex: 1;
+    padding: 10px;
+}
+
+#definition-box {
+    padding: 20px;
+    background: #f4f4f4;
+    margin: 20px;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.buttons {
+    margin: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+#search-field {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.highlight {
+    font-weight: bold;
+    background-color: yellow;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+}
+
+.header {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+    color: #333;
+}
+.download {
+    width: 500px;
+    height: 100px;
+    margin: 0 auto;
+}
+.pdfdl {
+    width: 200px;
+    height: 300px;
+    margin: 0 auto;
+    background-image:url("thumb.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+</style>
+</head>
+<body>
+    <div class="banner">
+        <img src="lockup.png" alt="Quality-Built Braking Systems">
+    </div>
+    <div class="header">
+        BRAKE TERMINOLOGY
+    </div>
+
+    <div class="buttons">
+        <button onclick="showCategoryView()">Show Category View</button>
+        <button onclick="showAlphabeticalView()">Show Alphabetical View</button>
+        <input type="text" id="search-field" placeholder="Search...">
+    </div>
+    <div class="content-wrapper">
+        <div class="navbar" id="navbar"></div>
+        <div id="definition-box"></div>
+    </div>
+    <div class="download">
+    <a href="/Users/joemicallef/legacy of manufacturing/QB_BrakeTerminology.pdf"> Click here to download a printable version </a>
+   
+    </div>
+    <!-- <div class="pdfdl">
+    </div> -->
+    <!-- <div class="banner">
+        <img src="footer.png" alt="Quality-Built Braking Systems">
+    </div> -->
+<script>
+const menuStructure = {
+    "whole braking system": {
+        "type of friction": {
+            "Abrasive Friction": "The mechanical rubbing of the brake pad material directly onto the rotor disc, resulting in the mechanical wear of both pad and rotor.",
+            "Adherent Friction": "The transfer of a thin layer of brake pad material, which sticks (adheres) to the rotor face. The layer of pad material, once evenly established on the rotor, is what rubs on the brake pad. The bonds that are broken, for the conversion of Kinetic to Thermal energy, are formed instantaneously before being broken again."
+        },
+        "type of system": {
+            "ABS": "Acronym for Anti-Lock Braking system. Anti Lock braking systems sense the speed and rate of deceleration of each of the wheels of a vehicle independently and, through a microprocessor control system, act to prevent lock up of any of the tires under braking force by cycling the line pressure to the wheel that is approaching lock up. Most current passenger cars are fitted with ABS.",
+            "Anti-lock Braking System": "Anti lock braking systems sense the speed and rate of deceleration of each of the wheels of a vehicle independently and, through a microprocessor control system, act to prevent lock up of any of the tires under braking force by cycling the line pressure to the wheel that is approaching lock up. Most current passenger cars are fitted with ABS.",
+            "Carbon/carbon brake": "A braking system in which both discs and pads are manufactured from carbon composite material. Utilized in every form of racing where they are not outlawed, carbon/carbon brakes offer significant reduction in rotating mass and inertia along with much greater thermal capacity and dimensional stability in use. The disadvantages include cost, a certain amount of lag time while heat builds up (especially in the wet) and some difficulty in modulation. Contrary to popular belief, the coefficient of friction is no better than that of state of the art carbon metallic pads and cast iron discs. A major advantage on super speedways is the reduction of gyroscopic precession on corner entry."
+        },
+        "type of characteristic": {
+            "Braking torque": "Braking torque in pounds feet on a single wheel is the effective rotor radius in inches times clamping force in pounds times the coefficient of friction of the pad against the rotor (a unit-less value) all divided by 12. Braking torque is the force that actually decelerates the wheel and tire. To increase the braking torque it is necessary to increase the line pressure, the piston area (clamping force), the coefficient of friction, or the effective rotor radius. Increasing the pad area will not increase the braking torque.",
+            "Fade": "Loss of braking efficiency from excessive thermal stress. There are three separate and distinct types of brake fade: 1. Pad fade: When the temperature at the interface between the pad and the rotor exceeds the thermal capacity of the pad, the pad loses friction capability due largely to out gassing of the binding agents in the pad compound. The brake pedal remains firm and solid but the car won't stop. The first indication is a distinctive and unpleasant smell, which should serve as a warning to back off. 2. Fluid boiling: When the fluid boils in the calipers, gas bubbles are formed. Since gasses are compressible, the brake pedal becomes soft and \"mushy\" and pedal travel increases. You can probably still stop the car by pumping the pedal but efficient modulation is gone. This is a gradual process with lots of warning. 3. Green fade: When the pad is first placed in service the first few heat cycles will cause the volatile elements of the material to out gas. The process is continuous throughout the service life of the pad, but it is most pronounced in the bedding in process when the outgassed materials form a slippery layer between the pad and the disc reducing the coefficient of friction to near zero. Once the pads are bedded in out-gassing is so slow as to not be a problem unless the effective temperature range of the pad is exceeded."
+        },
+        "braking fluids": {
+            "Ether based brake fluid": "\"Normal\" brake fluids are based on Alkyl Polyglycol Ether Esters. Also, sometimes referred to as Glycol Ether Borate Ester fluids. DOT 3 and DOT4 fluids are suitable for high performance passenger car use.",
+            "Glycol brake fluid": "See \"ether based brake fluid\"",
+            "Silicone brake fluid": "Brake fluid based on silicone. While silicon based fluids are less hygroscopic than ether based fluids, they are subject to \"frothing\" when subjected to high frequency vibration and when forced through small orifices. This makes them unsuitable for racing or high performance use."
+        },
+        "definitions": {
+            "OE": "This is an abbreviation for Original Equipment. Please see the section \"Original Equipment\". Sometimes it is used as an abbreviation to refer to the Original Equipment Manufacturer (but more correctly referred to as the OEM).",
+            "OEM": "This is an abbreviation for Original Equipment Manufacturer.",
+            "Original Equipment": "This is an industry standard term for that equipment that was installed on the model(s), being referred to in context, at the time of manufacture."
+        }
+    },
+    "calipers": {
+        "type of material": {
+            "Aluminum Beryllium": "A composite material of exceptional stiffness to weight ratio used for Formula One calipers (and Ilmor/Mercedes engine blocks) in the late 1990s. Now outlawed on health grounds.",
+            "Aluminum Lithium": "A composite material of exceptional stiffness to weight ratio currently being used for Formula One calipers."
+        },
+        "type of process": {
+            "Squeeze form casting": "A casting process that is a cross between die casting and forging. Liquid aluminum is poured into a die and, just before it begins to solidify, the die is forced closed under very high pressure. Alternatively a second cylinder is filled during the molding other than the primary injection cylinder that is then compressed at high pressure to increase the molding pressure. The process reduces porosity and leaves the grain structure more like a forging than a casting - resulting in a stronger and stiffer part."
+        },
+        "type of system": {
+            "Multi pad systems": "Caliper systems utilizing multiple pistons (either four six or eight) with separate pads and abutment systems for each pad. The design, almost universal in professional racing, provides multiple leading edges for better \"bite\". At the same time the very short pads ensure even longitudinal wear without the necessity for differential piston diameters."
+        },
+        "performance": {
+            "Clamping force": "The clamping force of a caliper in pounds is the brake line pressure multiplied by the total piston area of the caliper in a fixed caliper and two times the total piston area in a floating design. To increase the clamping force it is necessary to either increase the line pressure or the piston area. Increasing the pad area or the coefficient of friction will not increase clamping force."
+        }
+    },
+    "brake pads": {
+        "type of component": {
+            "Anti-squeal plates": "Very thin stiff metallic or composite plates, sometimes coated with a high temperature solid lubricant, inserted between the pad backing plates and caliper pistons on passenger cars to reduce or eliminate brake squeal.",
+            "Backing plate": "The steel portion of a disc brake pad which contacts the caliper piston(s) and to which the friction material is bonded. The backing plate provides the necessary stiffness and mechanical strength to the pad system. Its dimensions, flatness and surface finish must be closely controlled. The longer the pad, the thicker the backing plate must be. Backing plates of less than about 3 mm should be viewed with suspicion unless the pad is very short."
+        },
+        "type of material": {
+            "Cast iron": "Metallic iron containing more than 2% dissolved carbon within its matrix (as opposed to steel which contains less than 2%) and less than 4.5%. Because of its cost, relative ease of manufacture and thermal stability cast iron (sometimes referred to as \"gray cast iron\" because of its characteristic color, but is actually a more specialized material for brake applications) is the material of choice for almost all automotive brake discs. To work correctly, the parts must be produced at the foundry with tightly monitored chemistry and cooling cycles to control the shape, distribution and form of the precipitation of the excess carbon. This is done to minimize distortion in machining, provide good wear characteristics, dampen vibration and resist cracking in subsequent use."
+        },
+        "performance": {
+            "Thermal shock": "Disc materials, particularly cast iron are degraded not only by the magnitude of temperatures reached, but also by the \"delta\" temperatures - the speed at which the temperature increases and decreases. Cracks are largely caused by weakening of the bonds between the grains of the metal brought about by rapid change in temperature."
+        }
+
+    },
+        "rotors": {
+        "type of characteristic": {
+            "Bluing": "Discoloring of cast iron rotors due to heat. Although bluing is evidence of thermal stress and will lead to reduced rotor life, it is normal under repeated hard braking and is not a cause for concern.",
+            "Thickness Variation (TV)": "Variation in the transfer layer, which initiates brake vibration. While the impact of an uneven transfer layer is almost imperceptible at first, as the pad starts riding the high and low spots, more and more TV will be naturally generated until the vibration is much more evident. With prolonged exposure, the high spots can become hot spots and can actually change the metallurgy of the rotor in those areas, creating \"hard\" spots in the rotor face that are virtually impossible to remove."
+        },
+        "type of component": {
+            "Rotor": "see \"Disc\""
+        }
+    
+    },
+    "master cylinders": {
+        "type of component": {
+            "Master cylinder": "The hydraulic cylinder that converts the driver's pedal effort into hydraulic fluid pressure for subsequent transmission to the operating end of the braking system (calipers).",
+            "Reservoir": "The container in which brake fluid is stored to provide a source of fluid for the master cylinder(s). The reservoir must have sufficient volume to allow fluid displacement equivalent to wearing the pads down past the backing plates. It must also be sealed to prevent the absorption of moisture by the highly hygroscopic brake fluid. Typically the reservoir cap is fitted with an elastomeric bellows open to atmosphere but sealed from the fluid."
+        }
+    }
+};
+
+function createMenu(menuData) {
+    const navbar = document.getElementById('navbar');
+    for (const menu in menuData) {
+        const dropdown = document.createElement('div');
+        dropdown.className = 'dropdown';
+        
+        const button = document.createElement('button');
+        button.className = 'dropbtn';
+        button.textContent = menu;
+        button.onclick = () => toggleSticky(dropdown);
+        dropdown.appendChild(button);
+        
+        const megaDropdown = document.createElement('div');
+        megaDropdown.className = 'mega-dropdown';
+        
+        const row = document.createElement('div');
+        row.className = 'row';
+        
+        for (const submenu in menuData[menu]) {
+            const column = document.createElement('div');
+            column.className = 'column';
+            
+            const h3 = document.createElement('h3');
+            h3.textContent = submenu;
+            column.appendChild(h3);
+            
+            for (const link in menuData[menu][submenu]) {
+                const anchor = document.createElement('a');
+                anchor.href = "#";
+                anchor.textContent = link;
+                anchor.onclick = () => showDefinitions(menu, submenu, link);
+                column.appendChild(anchor);
+            }
+            
+            row.appendChild(column);
+        }
+        
+        megaDropdown.appendChild(row);
+        dropdown.appendChild(megaDropdown);
+        navbar.appendChild(dropdown);
+    }
+}
+
+function toggleSticky(element) {
+    // Remove sticky class from all dropdowns
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        if (dropdown !== element) {
+            dropdown.classList.remove('sticky');
+        }
+    });
+    // Toggle sticky class on the clicked dropdown
+    element.classList.toggle('sticky');
+}
+
+function showDefinitions(menu, submenu, link) {
+    const definitionBox = document.getElementById('definition-box');
+    const definition = menuStructure[menu][submenu][link];
+    let content = '<h2>' + menu + ' - ' + submenu + ' - ' + link + '</h2>';
+    content += '<strong>' + link + ':</strong> ' + definition + '<br><br>';
+    definitionBox.innerHTML = content;
+}
+
+function showCategoryView() {
+    document.getElementById('navbar').innerHTML = '';
+    createMenu(menuStructure);
+}
+
+function showAlphabeticalView() {
+    document.getElementById('navbar').innerHTML = '';
+    const flatMenu = {};
+
+    for (const menu in menuStructure) {
+        for (const submenu in menuStructure[menu]) {
+            for (const link in menuStructure[menu][submenu]) {
+                flatMenu[link] = menuStructure[menu][submenu][link];
+            }
+        }
+    }
+
+    const sortedLinks = Object.keys(flatMenu).sort();
+    const navbar = document.getElementById('navbar');
+    
+    sortedLinks.forEach(link => {
+        const anchor = document.createElement('a');
+        anchor.href = "#";
+        anchor.textContent = link;
+        anchor.onclick = () => {
+            const definitionBox = document.getElementById('definition-box');
+            const definition = flatMenu[link];
+            let content = '<h2>' + link + '</h2>';
+            content += '<strong>' + link + ':</strong> ' + definition + '<br><br>';
+            definitionBox.innerHTML = content;
+        };
+        navbar.appendChild(anchor);
+    });
+}
+
+function highlightTerm(term, definition) {
+    const regex = new RegExp(`(${term})`, 'gi');
+    return definition.replace(regex, '<span class="highlight">$1</span>');
+}
+
+function searchDefinitions() {
+    const query = document.getElementById('search-field').value.toLowerCase();
+    const definitionBox = document.getElementById('definition-box');
+    const results = [];
+
+    for (const menu in menuStructure) {
+        for (const submenu in menuStructure[menu]) {
+            for (const link in menuStructure[menu][submenu]) {
+                if (link.toLowerCase().includes(query) || menuStructure[menu][submenu][link].toLowerCase().includes(query)) {
+                    results.push({ menu, submenu, link, definition: menuStructure[menu][submenu][link] });
+                }
+            }
+        }
+    }
+
+    if (results.length > 0) {
+        let content = '';
+        results.forEach(result => {
+            const highlightedDefinition = highlightTerm(query, result.definition);
+            content += '<h2>' + result.menu + ' - ' + result.submenu + ' - ' + result.link + '</h2>';
+            content += '<strong>' + result.link + ':</strong> ' + highlightedDefinition + '<br><br>';
+        });
+        definitionBox.innerHTML = content;
+    } else {
+        definitionBox.innerHTML = '<p>Definition not found</p>';
+    }
+}
+
+document.getElementById('search-field').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        searchDefinitions();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    showCategoryView();
+});
+
+</script>
+
+</body>
+</html>
